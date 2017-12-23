@@ -20,6 +20,5 @@
     "through2": "^2.0.1",
     "tunnel-agent": "^0.4.3"
   },
-  "bin": "bin/index.js",
   "main": "index.js"
 }
