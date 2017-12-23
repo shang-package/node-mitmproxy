@@ -1,32 +1,6 @@
 {
   "name": "node-mitmproxy",
   "version": "3.1.0",
-  "description": "Node.js MITM Proxy",
-  "main": "lib",
-  "bin": "lib/bin/index.js",
-  "scripts": {
-    "test": "node ./test/ConfigTestCases.test.js",
-    "build": "babel -w src -d lib",
-    "prepublish": "babel src -d lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wuchangming/node-mitmproxy.git"
-  },
-  "keywords": [
-    "MITM",
-    "proxy",
-    "Node"
-  ],
-  "author": "wuchangming",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/wuchangming/node-mitmproxy/issues"
-  },
-  "homepage": "https://github.com/wuchangming/node-mitmproxy#readme",
-  "devDependencies": {
-    "babel-cli": "^6.6.5"
-  },
   "dependencies": {
     "agentkeepalive": "^2.1.1",
     "babel-core": "^6.8.0",
@@ -46,12 +20,7 @@
     "through2": "^2.0.1",
     "tunnel-agent": "^0.4.3"
   },
-  "files": [
-    "lib"
-  ],
-  "engines": {
-    "node": ">= 4"
-  }
+  "main": "index.js"
 }
 {
   "name": "node-mitmproxy",
