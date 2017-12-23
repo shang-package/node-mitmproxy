@@ -20,6 +20,6 @@
     "through2": "^2.0.1",
     "tunnel-agent": "^0.4.3"
   },
-  "bin": "lib/bin/index.js",
+  "bin": "bin/index.js",
   "main": "index.js"
 }
