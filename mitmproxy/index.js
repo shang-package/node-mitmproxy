@@ -51,7 +51,7 @@ module.exports = {
             getCertSocketTimeout: getCertSocketTimeout
         });
 
-        var connectHandler = createConnectHandler(sslConnectInterceptor, fakeServersCenter);
+        var connectHandler = createConnectHandler(sslConnectInterceptor, fakeServersCenter, externalProxy);
 
         var server = new http.Server();
         server.listen(port, function () {

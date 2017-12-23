@@ -53,7 +53,7 @@ module.exports = function () {
         }
     }, {
         key: 'getServerPromise',
-        value: function getServerPromise(hostname, port) {
+        value: function getServerPromise(hostname, port, req, externalProxy) {
             var _this = this;
 
             for (var i = 0; i < this.queue.length; i++) {
@@ -81,7 +81,7 @@ module.exports = function () {
                             switch (_context2.prev = _context2.next) {
                                 case 0:
                                     _context2.next = 2;
-                                    return _this.certAndKeyContainer.getCertPromise(hostname, port);
+                                    return _this.certAndKeyContainer.getCertPromise(hostname, port, req, externalProxy);
 
                                 case 2:
                                     certObj = _context2.sent;

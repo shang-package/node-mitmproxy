@@ -6,6 +6,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var tlsUtils = require('./tlsUtils');
 var https = require('https');
+var ProxyAgent = require('proxy-agent');
 
 module.exports = function () {
     function CertAndKeyContainer(_ref) {
@@ -36,7 +37,7 @@ module.exports = function () {
         }
     }, {
         key: 'getCertPromise',
-        value: function getCertPromise(hostname, port) {
+        value: function getCertPromise(hostname, port, req, externalProxy) {
             var _this = this;
 
             for (var i = 0; i < this.queue.length; i++) {
@@ -66,12 +67,31 @@ module.exports = function () {
                     }
                 };
                 var certObj = void 0;
-                var preReq = https.request({
+                var requestOptions = {
                     port: port,
                     hostname: hostname,
                     path: '/',
                     method: 'HEAD'
-                }, function (preRes) {
+                };
+
+                var externalProxyUrl = null;
+
+                if (externalProxy) {
+                    if (typeof externalProxy === 'string') {
+                        externalProxyUrl = externalProxy;
+                    } else if (typeof externalProxy === 'function') {
+                        try {
+                            externalProxyUrl = externalProxy(req);
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                }
+                if (externalProxyUrl) {
+                    requestOptions.agent = new ProxyAgent(externalProxyUrl);
+                }
+
+                var preReq = https.request(requestOptions, function (preRes) {
                     try {
                         var realCert = preRes.socket.getPeerCertificate();
                         if (realCert) {

@@ -6,7 +6,7 @@ var colors = require('colors');
 
 var localIP = '127.0.0.1';
 // create connectHandler function
-module.exports = function createConnectHandler(sslConnectInterceptor, fakeServerCenter) {
+module.exports = function createConnectHandler(sslConnectInterceptor, fakeServerCenter, externalProxy) {
 
     // return
     return function connectHandler(req, cltSocket, head) {
@@ -14,7 +14,7 @@ module.exports = function createConnectHandler(sslConnectInterceptor, fakeServer
         var srvUrl = url.parse('https://' + req.url);
 
         if (typeof sslConnectInterceptor === 'function' && sslConnectInterceptor.call(null, req, cltSocket, head)) {
-            fakeServerCenter.getServerPromise(srvUrl.hostname, srvUrl.port).then(function (serverObj) {
+            fakeServerCenter.getServerPromise(srvUrl.hostname, srvUrl.port, req, externalProxy).then(function (serverObj) {
                 connect(req, cltSocket, head, localIP, serverObj.port);
             }, function (e) {
                 console.error(e);
